@@ -15,7 +15,7 @@
 #include "Menu/Menu.hpp"
 #include "Menu/Jni.hpp"
 #include "Includes/Macros.h"
-#include "Dobby/dobby.h"
+#include "dobby.h"
 
 // ==================== متغيرات التحكم ====================
 bool godMode = false;
@@ -24,6 +24,7 @@ bool infiniteAmmo = false;
 bool speedHack = false;
 
 // ==================== عناوين RVA (من الدامب) ====================
+// دالة OnHPUpdated في كلاس BaseNetworkPlayer
 #define RVA_Player_OnHPUpdated 0xB1EA80 
 
 // ==================== الأوفستات (Offsets) ====================
@@ -46,14 +47,11 @@ void* Player_OnHPUpdated(void* instance, float oldValue, float newValue) {
             *(float*)((uintptr_t)instance + OFFSET_PLAYER_HP) = 100.0f;
         }
         
-        // 2. High Damage & Infinite Ammo
+        // 2. High Damage & Infinite Ammo (مثال)
         if (highDamage || infiniteAmmo) {
             void* character = *(void**)((uintptr_t)instance + OFFSET_PLAYER_CHARACTER);
             if (character != NULL) {
-                // هنا بنفترض إن الكاركتر جواه مؤشر للسلاح
-                // void* gun = *(void**)((uintptr_t)character + 0x??); 
-                // if (highDamage) *(float*)((uintptr_t)gun + OFFSET_GUN_DAMAGE) = 999.0f;
-                // if (infiniteAmmo) *(int*)((uintptr_t)gun + OFFSET_GUN_AMMO_IN_MAG) = 999;
+                // كود تعديل السلاح (محتاج عنوان السلاح)
             }
         }
     }
