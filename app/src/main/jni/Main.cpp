@@ -23,16 +23,12 @@ bool highDamage = false;
 bool infiniteAmmo = false;
 bool speedHack = false;
 
-// ==================== عناوين RVA (من الدامب) ====================
-// دالة OnHPUpdated في كلاس BaseNetworkPlayer
+// ==================== عناوين RVA ====================
 #define RVA_Player_OnHPUpdated 0xB1EA80 
 
 // ==================== الأوفستات (Offsets) ====================
-// BaseNetworkPlayer
 #define OFFSET_PLAYER_HP 0x6C
 #define OFFSET_PLAYER_CHARACTER 0x68
-
-// Gun (Weapons) - الأوفستات الصح من الدامب
 #define OFFSET_GUN_DAMAGE 0x7C 
 #define OFFSET_GUN_AMMO_IN_MAG 0xB0 
 #define OFFSET_GUN_MAG_SIZE 0xAC 
@@ -47,11 +43,11 @@ void* Player_OnHPUpdated(void* instance, float oldValue, float newValue) {
             *(float*)((uintptr_t)instance + OFFSET_PLAYER_HP) = 100.0f;
         }
         
-        // 2. High Damage & Infinite Ammo (مثال)
+        // 2. High Damage & Infinite Ammo (أساسي)
         if (highDamage || infiniteAmmo) {
             void* character = *(void**)((uintptr_t)instance + OFFSET_PLAYER_CHARACTER);
             if (character != NULL) {
-                // كود تعديل السلاح (محتاج عنوان السلاح)
+                // كود تعديل السلاح هيتحط هنا بعدين
             }
         }
     }
